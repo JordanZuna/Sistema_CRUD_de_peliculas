@@ -36,7 +36,31 @@ int main(int argc, char** argv) {
 		
 			break;
 		case 4:
-			// funcion actualizar			
+			cout << "Ingrese el codigo de la pelicula a actualizar: ";
+			cin >> codigoActualizar;
+			
+			peli = buscar(codigoActualizar, ruta);
+			if (peli.codigo != "No encontrado") {
+				cout << "Pelicula encontrada: " << peli.nombrePelicula << endl;
+				cout << "--- Ingrese los NUEVOS datos ---" << endl;
+				
+				cin.ignore(); 
+				
+				cout << "Nuevo Nombre: ";
+				getline(cin, peliculaActualizada.nombrePelicula);
+				
+				cout << "Nuevo Genero: ";
+				getline(cin, peliculaActualizada.genero);
+				
+				cout << "Nueva Duracion: ";
+				getline(cin, peliculaActualizada.duracion);
+				peliculaActualizada.codigo = codigoActualizar; 
+				
+				actualizar(codigoActualizar, peliculaActualizada, ruta);
+			} else {
+				cout << "Error: No se encontro ninguna pelicula con el codigo '" << codigoActualizar << "'." << endl;
+			}
+			break;			
 		case 5:
 			cout << "Ingrese el codigo de la pelicula a eliminar: ";
 			cin >> codigoEliminar;
