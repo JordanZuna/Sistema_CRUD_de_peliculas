@@ -91,3 +91,24 @@ void agregar(const Pelicula& nuevaPelicula, const string& ruta){
 	}
 	guardar(listaPeliculas, ruta);
 }
+
+void actualizar(const string& codigo, const Pelicula& nuevaPeli, const string& ruta) {
+	vector<Pelicula> peliculas = leer(ruta);
+	
+	auto it = find_if(peliculas.begin(), peliculas.end(), 
+					  [&codigo](const Pelicula& p) { 
+						  return p.codigo == codigo; 
+					  });
+                      
+	if (it != peliculas.end()) {
+		it->nombrePelicula = nuevaPeli.nombrePelicula;
+		it->genero = nuevaPeli.genero;
+		it->duracion = nuevaPeli.duracion;
+		
+		guardar(peliculas, ruta);
+		
+		cout << "Pelicula con codigo '" << codigo << "' actualizada exitosamente." << endl;
+	} else {
+		cout << "Error: No se encontro ninguna pelicula con el codigo '" << codigo << "'." << endl;
+	}
+}
