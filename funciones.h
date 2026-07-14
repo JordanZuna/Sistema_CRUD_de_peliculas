@@ -32,5 +32,6 @@ vector<Pelicula> leer(const string ruta);
 void agregar(const Pelicula& nuevaPelicula, const string& ruta);
 void mostrarPeliculas(const string& ruta);
 Pelicula buscar(const string& codigo, const string& ruta);
+void actualizar(const string& codigo, const Pelicula& nuevaPeli, const string& ruta);
 
 #endif
