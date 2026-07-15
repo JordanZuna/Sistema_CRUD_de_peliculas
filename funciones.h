@@ -12,7 +12,7 @@ struct Pelicula {
 	string codigo;   
 	string nombrePelicula;
 	string genero;
-	string duracion;
+	string duracion;https://github.com/JordanZuna/Sistema_CRUD_de_peliculas/blob/main/main.cpp
 	
 	string mostrar() const{
 		ostringstream oss;
@@ -33,5 +33,6 @@ void agregar(const Pelicula& nuevaPelicula, const string& ruta);
 void mostrarPeliculas(const string& ruta);
 Pelicula buscar(const string& codigo, const string& ruta);
 void actualizar(const string& codigo, const Pelicula& nuevaPeli, const string& ruta);
+void eliminar(const string& codigo, const string& ruta);
 
 #endif
