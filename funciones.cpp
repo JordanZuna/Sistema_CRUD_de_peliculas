@@ -81,8 +81,8 @@ Pelicula buscar(const string& codigo, const string& ruta){
 void agregar(const Pelicula& nuevaPelicula, const string& ruta){
 	vector<Pelicula> listaPeliculas = leer(ruta);
 	auto it = find_if(listaPeliculas.begin(), listaPeliculas.end(),
-	  [&](const Pelicula& peli){return peli.codigo == peli.codigo;});
-		
+					  [&](const Pelicula& peli){return peli.codigo == peli.codigo;});
+	
 	if(it == listaPeliculas.end()){
 		listaPeliculas.push_back(nuevaPelicula);
 		cout << "Pelicula con codigo " << nuevaPelicula.codigo << " registrada exitosamente\n";
@@ -99,7 +99,7 @@ void actualizar(const string& codigo, const Pelicula& nuevaPeli, const string& r
 					  [&codigo](const Pelicula& p) { 
 						  return p.codigo == codigo; 
 					  });
-                      
+	
 	if (it != peliculas.end()) {
 		it->nombrePelicula = nuevaPeli.nombrePelicula;
 		it->genero = nuevaPeli.genero;
@@ -108,6 +108,21 @@ void actualizar(const string& codigo, const Pelicula& nuevaPeli, const string& r
 		guardar(peliculas, ruta);
 		
 		cout << "Pelicula con codigo '" << codigo << "' actualizada exitosamente." << endl;
+	} else {
+		cout << "Error: No se encontro ninguna pelicula con el codigo '" << codigo << "'." << endl;
+	}
+}
+
+void eliminar(const string& codigo, const string& ruta) {
+	vector<Pelicula> listaPeliculas = leer(ruta);
+	auto it = remove_if(listaPeliculas.begin(), listaPeliculas.end(), 
+						[&codigo](const Pelicula& peli) {
+							return peli.codigo == codigo;
+						});
+	if (it != listaPeliculas.end()) {
+		listaPeliculas.erase(it, listaPeliculas.end());
+		guardar(listaPeliculas, ruta);
+		cout << "Pelicula con codigo '" << codigo << "' eliminada exitosamente." << endl;
 	} else {
 		cout << "Error: No se encontro ninguna pelicula con el codigo '" << codigo << "'." << endl;
 	}
