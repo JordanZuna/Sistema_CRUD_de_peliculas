@@ -14,6 +14,8 @@ int main(int argc, char** argv) {
 	int opcion = -1;
 	Pelicula peli = buscar(codigoPelicula,ruta);
 	string codigoEliminar = "";
+	string codigoActualizar = "";
+	Pelicula peliculaActualizada;
 	
 	while (opcion!=0){
 		cout << "Registro de Peliculas " << endl;
@@ -28,11 +30,42 @@ int main(int argc, char** argv) {
 		
 		switch (opcion) {
 		case 1:
-	
+			cout << "\n--- LISTADO DE PELICULAS ---" << endl;
+			mostrarPeliculas(ruta);
 			break;
+	
+			
 		case 2:
-			// funcion buscar pelicula
+		cout << "Ingrese el codigo de la pelicula a buscar: ";
+			cin >> codigoPelicula;
+			
+			peli = buscar(codigoPelicula, ruta);
+			
+			if (peli.codigo != "No encontrado") {
+				cout << "Pelicula encontrada:\n";
+				cout << peli.mostrar() << endl;
+			} else {
+				cout << "Error: No se encontro ninguna pelicula con el codigo '" << codigoPelicula << "'." << endl;
+			}
+			break;
+			
 		case 3:
+		cout << "\n--- AGREGAR NUEVA PELICULA ---" << endl;
+			cout << "Codigo: ";
+			cin >> peliculaNueva.codigo;
+			
+			cin.ignore(); 
+			
+			cout << "Nombre de la pelicula: ";
+			getline(cin, peliculaNueva.nombrePelicula);
+			
+			cout << "Genero: ";
+			getline(cin, peliculaNueva.genero);
+			
+			cout << "Duracion: ";
+			getline(cin, peliculaNueva.duracion);
+			
+			agregar(peliculaNueva, ruta);
 		
 			break;
 		case 4:
