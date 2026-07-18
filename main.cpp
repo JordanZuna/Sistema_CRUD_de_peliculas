@@ -4,9 +4,23 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <limits>
 #include "funciones.h"
 
 using namespace std;
+
+string leerNoVacio(string mensaje) {
+    string entrada;
+    do {
+        cout << mensaje;
+        getline(cin, entrada);
+        if (entrada.empty()) {
+            cout << "Este campo no puede estar vacio. Intente de nuevo." << endl;
+        }
+    } while (entrada.empty());
+    return entrada;
+}
+
 int main(int argc, char** argv) {
 	string codigoPelicula = "";
 	string ruta = "archivoPeliculas.txt";
@@ -26,8 +40,15 @@ int main(int argc, char** argv) {
 		cout << "4. Actualizar pelicula" << endl;
 		cout << "5. Eliminar pelicula" << endl;
 		cout << "0. salir" << endl;
-		cout << "Elija una opcion: "; cin >> opcion;
-		
+		cout << "Elija una opcion: ";
+		if(!(cin >> opcion)) {
+			cout << "Error. Por favor, ingrese un numero entero." << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			opcion = -1;
+		} else {
+		}
+
 		switch (opcion) {
 		case 1:
 			cout << "\n--- LISTADO DE PELICULAS ---" << endl;
@@ -50,43 +71,27 @@ int main(int argc, char** argv) {
 			break;
 		case 3:
 			cout << "\n--- AGREGAR NUEVA PELICULA ---" << endl;
-			cout << "Codigo: ";
-			cin >> peliculaNueva.codigo;
-			
+			cout << "Codigo: "; cin >> peliculaNueva.codigo;
 			cin.ignore(); 
-			
-			cout << "Nombre de la pelicula: ";
-			getline(cin, peliculaNueva.nombrePelicula);
-			
-			cout << "Genero: ";
-			getline(cin, peliculaNueva.genero);
-			
-			cout << "Duracion: ";
-			getline(cin, peliculaNueva.duracion);
-			
+			peliculaNueva.nombrePelicula = leerNoVacio("Nombre de la pelicula: ");
+			peliculaNueva.genero = leerNoVacio("Genero: ");
+			peliculaNueva.duracion = leerNoVacio("Duracion: ");
 			agregar(peliculaNueva, ruta);
 		
 			break;
 		case 4:
 			cout << "Ingrese el codigo de la pelicula a actualizar: ";
 			cin >> codigoActualizar;
-			
 			peli = buscar(codigoActualizar, ruta);
 			if (peli.codigo != "No encontrado") {
 				cout << "Pelicula encontrada: " << peli.nombrePelicula << endl;
 				cout << "--- Ingrese los NUEVOS datos ---" << endl;
-				
 				cin.ignore(); 
 				
-				cout << "Nuevo Nombre: ";
-				getline(cin, peliculaActualizada.nombrePelicula);
-				
-				cout << "Nuevo Genero: ";
-				getline(cin, peliculaActualizada.genero);
-				
-				cout << "Nueva Duracion: ";
-				getline(cin, peliculaActualizada.duracion);
-				peliculaActualizada.codigo = codigoActualizar; 
+				peliculaActualizada.nombrePelicula = leerNoVacio("Nombre de la pelicula: ");
+				peliculaActualizada.genero = leerNoVacio("Genero: ");
+				peliculaActualizada.duracion = leerNoVacio("Duracion: ");
+				peliculaActualizada.codigo = codigoActualizar;
 				
 				actualizar(codigoActualizar, peliculaActualizada, ruta);
 			} else {
