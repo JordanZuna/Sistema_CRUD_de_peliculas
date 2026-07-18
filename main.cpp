@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
 	string ruta = "archivoPeliculas.txt";
 	Pelicula peliculaNueva;
 	int opcion = -1;
-	Pelicula peli = buscar(codigoPelicula,ruta);
+	Pelicula peli;
 	string codigoEliminar = "";
 	string codigoActualizar = "";
 	Pelicula peliculaActualizada;
@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
 	
 			
 		case 2:
-		cout << "Ingrese el codigo de la pelicula a buscar: ";
+			cout << "Ingrese el codigo de la pelicula a buscar: ";
 			cin >> codigoPelicula;
 			
 			peli = buscar(codigoPelicula, ruta);
@@ -48,9 +48,8 @@ int main(int argc, char** argv) {
 				cout << "Error: No se encontro ninguna pelicula con el codigo '" << codigoPelicula << "'." << endl;
 			}
 			break;
-			
 		case 3:
-		cout << "\n--- AGREGAR NUEVA PELICULA ---" << endl;
+			cout << "\n--- AGREGAR NUEVA PELICULA ---" << endl;
 			cout << "Codigo: ";
 			cin >> peliculaNueva.codigo;
 			

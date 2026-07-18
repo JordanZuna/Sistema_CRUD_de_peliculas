@@ -15,7 +15,7 @@ ostream& operator<<(ostream& os, const Pelicula& peli){
 
 ostream& operator<<(ostream& os, const vector<Pelicula>& pelicula) {
 	for(const auto& p : pelicula){
-		os << p << "\n";
+		os << p;
 	}
 	return os;
 }
@@ -25,8 +25,12 @@ istream& operator>>(istream& is, Pelicula& peli){
 	   getline(is, peli.codigo, ';')&&
 	   getline(is, peli.nombrePelicula, ';')&&
 	   getline(is, peli.genero, ';')&&
-	   getline(is, peli.duracion, ';')
-	   ){}
+	   getline(is, peli.duracion)
+	   ){
+		if (!peli.duracion.empty() && peli.duracion.back() == '\r') {
+           peli.duracion.pop_back();
+       	}
+	   }
 	return is;
 }
 
@@ -61,7 +65,7 @@ vector<Pelicula> leer(const string ruta){
 }
 
 void mostrarPeliculas(const string& ruta){
-	for(const auto& peli : leer(ruta)){
+	for(auto& peli : leer(ruta)){
 		cout << peli.mostrar() << endl;
 	}
 }
@@ -69,8 +73,8 @@ void mostrarPeliculas(const string& ruta){
 Pelicula buscar(const string& codigo, const string& ruta){
 	Pelicula peliB;
 	peliB.codigo = "No encontrado";
-	for(auto& peli : leer(ruta)){
-		if(codigo == peliB.codigo){
+	for(const auto& peli : leer(ruta)){
+		if(codigo == peli.codigo){
 			peliB = peli;
 			break;
 		}
@@ -81,13 +85,13 @@ Pelicula buscar(const string& codigo, const string& ruta){
 void agregar(const Pelicula& nuevaPelicula, const string& ruta){
 	vector<Pelicula> listaPeliculas = leer(ruta);
 	auto it = find_if(listaPeliculas.begin(), listaPeliculas.end(),
-					  [&](const Pelicula& peli){return peli.codigo == peli.codigo;});
+					  [&](const Pelicula& peli){return peli.codigo == nuevaPelicula.codigo;});
 	
 	if(it == listaPeliculas.end()){
 		listaPeliculas.push_back(nuevaPelicula);
 		cout << "Pelicula con codigo " << nuevaPelicula.codigo << " registrada exitosamente\n";
 	} else {
-		cout << "Pelicula con codigo " << nuevaPelicula.codigo << " ya está registrada!\n";
+		cout << "Pelicula con codigo " << nuevaPelicula.codigo << " ya esta registrada!\n";
 	}
 	guardar(listaPeliculas, ruta);
 }

@@ -12,7 +12,7 @@ struct Pelicula {
 	string codigo;   
 	string nombrePelicula;
 	string genero;
-	string duracion;https://github.com/JordanZuna/Sistema_CRUD_de_peliculas/blob/main/main.cpp
+	string duracion;
 	
 	string mostrar() const{
 		ostringstream oss;
