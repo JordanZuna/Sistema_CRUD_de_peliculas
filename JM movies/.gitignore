@@ -1,0 +1,34 @@
+# Compiladores y archivos binarios
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Carpetas de compilación generadas por Qt Creator
+build-*/
+.vs/
+.idea/
+
+# Archivos de objetos temporales y dependencias
+*.o
+*.obj
+*.aps
+*.idb
+*.ncb
+*.pch
+*.pdb
+*.rsc
+*.sbr
+*.ilk
+*.bsc
+
+# Archivos de metadatos de Qt y Makefiles
+Makefile*
+*.stash
+*.qmake.stash
+.qmake.stash
+*.pro.user*
+.ui_*.h
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
