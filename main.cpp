@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <limits>
 #include "funciones.h"
+#include "compra.h"
 
 using namespace std;
 
@@ -39,6 +40,7 @@ int main(int argc, char** argv) {
 		cout << "3. Agregar nueva pelicula" << endl;
 		cout << "4. Actualizar pelicula" << endl;
 		cout << "5. Eliminar pelicula" << endl;
+		cout << "6. Simular compra de pelicula" << endl;
 		cout << "0. salir" << endl;
 		cout << "Elija una opcion: ";
 		if(!(cin >> opcion)) {
@@ -103,6 +105,9 @@ int main(int argc, char** argv) {
 			cin >> codigoEliminar;
 			eliminar(codigoEliminar, ruta);		
 			break;
+		case 6:
+            simularCompra(ruta);
+            break;
 		case 0:
 			cout << "--- SALIENDO DEL SISTEMA ---" << endl;
 			break;
